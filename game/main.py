@@ -39,6 +39,7 @@ def draw_court(screen):
 
 class Player:
      def __init__(self, position, score, swing):
+        pass
           
 
 while running:  #this is the game loop
