@@ -37,8 +37,16 @@ def draw_court(screen):
     pygame.draw.line(screen, (255, 255, 255), (center_x - 10, 250), (center_x + 10, 250), 5)
 
 class Player:
-     def __init__(self, position, score, swing):
-          pass
+        def __init__(self, position, score, swing):
+                self.position = position
+                self.score = score
+                self.swing = swing
+        
+        def update_position(self, ball_x, court_width):
+                speed = 5
+
+                
+
 
 while running:  #this is the game loop
         
