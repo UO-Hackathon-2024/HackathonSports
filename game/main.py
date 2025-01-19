@@ -64,6 +64,8 @@ async def main():
     await wait_for_start(socket)
 
     while running:  #this is the game loop
+        screen.fill((0, 0, 0))
+        
 
         fball.move_ball(target_x, target_y)
         pygame.draw.circle(screen, fball.color, (fball.x, fball.y), fball.radius)
@@ -73,6 +75,7 @@ async def main():
 
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
+
             playerOneChar.set_target(random.choice(li))
             playerOneChar.move_character()
 
@@ -84,7 +87,6 @@ async def main():
             draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
             playerOneChar.draw(screen)
         
-
             await send_player_swing(id, socket)
             await asyncio.sleep(1)
                 
