@@ -8,8 +8,9 @@ from object_movement.ball_maker import Ball
 from animation.animation_maker import Animation
 from animation.sprite_maker import SpriteSheet
 import math
-import os
 import cv2
+import os
+print("Current working directory:", os.getcwd())
 import numpy as np
 
 
