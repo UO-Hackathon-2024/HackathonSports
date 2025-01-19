@@ -29,9 +29,9 @@ def draw_court():
     left = (SCREEN_WIDTH - courtWidth) // 2
     top = (SCREEN_HEIGHT - courtHeight) // 2
     
-    #pygame.draw.rect(screen, WHITE, pygame.Rect(left, top, courtWidth, courtHeight), 5)
-    #pygame.draw.line(screen, (211,211,211), (left, (top + courtHeight// 2)), (left + courtWidth, (top + courtHeight// 2)), 5)
-    #pygame.draw.line(screen, WHITE, (0, margin), (SCREEN_WIDTH, margin), 3) #margin line for scores
+    pygame.draw.rect(screen, WHITE, pygame.Rect(left, top, courtWidth, courtHeight), 5)
+    pygame.draw.line(screen, (211,211,211), (left, (top + courtHeight// 2)), (left + courtWidth, (top + courtHeight// 2)), 5)
+    pygame.draw.line(screen, WHITE, (0, margin), (SCREEN_WIDTH, margin), 3) #margin line for scores
 
 def draw_text(text, font, text_color, text_x, text_y):
       img = font.render(text, True, text_color)
@@ -44,7 +44,7 @@ class Player:
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, width, height)
         self.speed = 7
-        self.target = x
+        self.target = (x,y)
 
     def set_target(self, new_target):
         self.target = new_target

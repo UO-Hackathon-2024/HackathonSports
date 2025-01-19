@@ -37,6 +37,8 @@ class Player:
         self.rect.center = (x, y)  # Set the initial center of the rectangle
         self.speed = speed
         self.target = self.rect.center  # Default target is the current center
+        self.x = self.rect.center[0]
+        self.y = self.rect.center[1]
 
     def set_target(self, new_target):
         """Set a new target (x, y) for the player."""
@@ -64,6 +66,8 @@ class Player:
             if self.rect.centery < self.target[1]:
                 self.rect.centery = self.target[1]
 
+
+
     def draw(self, screen):
         """Draw the player rectangle on the screen."""
-        pygame.draw.rect(screen, (166, 189, 214), self.rect)
+        pygame.draw.rect(screen, (166, 189, 214, ), self.rect)

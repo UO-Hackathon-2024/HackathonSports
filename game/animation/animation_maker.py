@@ -1,4 +1,6 @@
 import pygame
+import sys
+sys.path.append('animation')
 import sprite_maker
 
 class Animation:
