@@ -25,7 +25,7 @@ export class TennisGame {
         this.windowDuration = windowDuration; 
     }
 
-    startRound() {
+    async startRound() {
         console.log("Round started");
         this.socketComm.sendEvent(GameEvent.ROUND_START);
 
@@ -84,6 +84,7 @@ export class TennisGame {
                 if (this.player2_score >= this.scoreToWin) { 
                     this.socketComm.sendEvent(GameEvent.PLAYER_2_WIN);
                 }
+                this.switchTurn(); // Ball goes to the other player immediately
                 this.startRound(); 
             }
 

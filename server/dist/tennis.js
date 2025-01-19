@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { SocketCommunicator, GameEvent, GameEventWithNumber } from "./socket_communicator.js";
 export class TennisGame {
     constructor(serveDuration, beforeWindowDuration, windowDuration) {
@@ -13,26 +22,28 @@ export class TennisGame {
         this.windowDuration = windowDuration;
     }
     startRound() {
-        console.log("Round started");
-        this.socketComm.sendEvent(GameEvent.ROUND_START);
-        if (this.turn === 1) {
-            this.socketComm.sendEvent(GameEvent.WAITNG_FOR_PLAYER_2_SERVE);
-        }
-        else {
-            this.socketComm.sendEvent(GameEvent.WAITNG_FOR_PLAYER_1_SERVE);
-        }
-        //Countdown to serve
-        setTimeout(() => {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("Round started");
+            this.socketComm.sendEvent(GameEvent.ROUND_START);
             if (this.turn === 1) {
-                this.socketComm.sendEvent(GameEvent.BALL_GOING_TOWARDS_PLAYER_1);
+                this.socketComm.sendEvent(GameEvent.WAITNG_FOR_PLAYER_2_SERVE);
             }
             else {
-                this.socketComm.sendEvent(GameEvent.BALL_GOING_TOWARDS_PLAYER_2);
+                this.socketComm.sendEvent(GameEvent.WAITNG_FOR_PLAYER_1_SERVE);
             }
+            //Countdown to serve
             setTimeout(() => {
-                this.putBallInRange(); // Serve to the other player
-            }, this.beforeWindowDuration);
-        }, this.serveDuration);
+                if (this.turn === 1) {
+                    this.socketComm.sendEvent(GameEvent.BALL_GOING_TOWARDS_PLAYER_1);
+                }
+                else {
+                    this.socketComm.sendEvent(GameEvent.BALL_GOING_TOWARDS_PLAYER_2);
+                }
+                setTimeout(() => {
+                    this.putBallInRange(); // Serve to the other player
+                }, this.beforeWindowDuration);
+            }, this.serveDuration);
+        });
     }
     putBallInRange() {
         //puts the ball in range for a player
@@ -68,6 +79,7 @@ export class TennisGame {
                 if (this.player2_score >= this.scoreToWin) {
                     this.socketComm.sendEvent(GameEvent.PLAYER_2_WIN);
                 }
+                this.switchTurn(); // Ball goes to the other player immediately
                 this.startRound();
             }
         }, this.timingWindow.getDuration());

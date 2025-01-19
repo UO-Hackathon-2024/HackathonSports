@@ -22,17 +22,9 @@ const beforeWindowDuration = 2000;
 const windowDuration = 1000; 
 const game = new TennisGame(serveDuration, beforeWindowDuration, windowDuration);
 /* --------------- */ 
-const startPingInterval = (ws: WebSocket, interval: number = 30000) => {
-    const pingInterval = setInterval(() => {
-    if (ws.readyState === WebSocket.OPEN) {
-        ws.ping(); // Send a ping frame
-    } else {
-        clearInterval(pingInterval); // Stop pinging if the connection is closed
-    }
-  }, interval);
-}
 
-wss.on('connection', (socket: WebSocket) => {
+
+wss.on('connection', async (socket: WebSocket) => {
     //Start the game when both players join 
     if (players.length > 2) { 
         socket.send("Server is full. Only two players allowed.");
@@ -53,13 +45,8 @@ wss.on('connection', (socket: WebSocket) => {
         players[0].socket.send(`player id: 1`);
         players[1].socket.send(`player id: 2`);
 
-        startPingInterval(players[0].socket);
-        startPingInterval(players[1].socket);
-
-
         const socketComm = new SocketCommunicator([players[0].socket, players[1].socket]);
         game.socketComm = socketComm; 
-        game.startRound(); 
         players.forEach(player => {
             player.socket.on('message', (message: string) => {
                 message = message.toString()
@@ -70,11 +57,17 @@ wss.on('connection', (socket: WebSocket) => {
                     game.swing(2);
                 }
             }); 
+            player.socket.on('close', (code, reason) => {
+                console.log(`Player ${player.id} disconnected: ${code} - ${reason}`);
+            });
+
+            player.socket.on('error', (error) => {
+                console.error(`WebSocket error for player ${player.id}:`, error);
+            });
         });  
+
+        await game.startRound(); 
     }
 });
-
-
-
 
 

@@ -25,7 +25,8 @@ font = pygame.font.Font(None, 36)
 URI = "ws://10.108.22.125:3000"  # Replace with your server's IP and port
 async def send_player_swing(playerId: int, websocket): 
     message = f"player{playerId}_swing"
-    await websocket.send(message)
+    async with asyncio.timeout(1000000):
+        await websocket.send(message)
 
 async def wait_for_start(websocket): 
     async for message in websocket: 
@@ -34,7 +35,7 @@ async def wait_for_start(websocket):
 
 async def main(): 
     
-    async with websockets.connect(URI) as socket: 
+    async with websockets.connect(URI, ping_timeout = 10000) as socket: 
         message = await socket.recv()
         id = 1
         if (message == "player id: 1"): 
@@ -53,7 +54,7 @@ async def main():
                 if key[pygame.K_SPACE]:
                         playerOneChar.set_target(random.choice(li))
                         await send_player_swing(id, socket)
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(0.2)
                         
                 playerOneChar.move_character()
                 screen.fill((0,0,0))

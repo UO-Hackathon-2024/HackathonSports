@@ -1,6 +1,15 @@
 /*
     Game server for HackSports, handles server events
 */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { WebSocketServer } from 'ws';
 import * as helpers from './server_helpers.js';
 import { TennisGame } from "./tennis.js";
@@ -16,7 +25,7 @@ const beforeWindowDuration = 2000;
 const windowDuration = 1000;
 const game = new TennisGame(serveDuration, beforeWindowDuration, windowDuration);
 /* --------------- */
-wss.on('connection', (socket) => {
+wss.on('connection', (socket) => __awaiter(void 0, void 0, void 0, function* () {
     //Start the game when both players join 
     if (players.length > 2) {
         socket.send("Server is full. Only two players allowed.");
@@ -35,7 +44,6 @@ wss.on('connection', (socket) => {
         players[1].socket.send(`player id: 2`);
         const socketComm = new SocketCommunicator([players[0].socket, players[1].socket]);
         game.socketComm = socketComm;
-        game.startRound();
         players.forEach(player => {
             player.socket.on('message', (message) => {
                 message = message.toString();
@@ -46,6 +54,13 @@ wss.on('connection', (socket) => {
                     game.swing(2);
                 }
             });
+            player.socket.on('close', (code, reason) => {
+                console.log(`Player ${player.id} disconnected: ${code} - ${reason}`);
+            });
+            player.socket.on('error', (error) => {
+                console.error(`WebSocket error for player ${player.id}:`, error);
+            });
         });
+        yield game.startRound();
     }
-});
+}));
