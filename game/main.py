@@ -11,7 +11,8 @@ import math
 import cv2
 
 import numpy as np
-
+import os
+print(os.getcwd())
 
 pygame.init()
 
