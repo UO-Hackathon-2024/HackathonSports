@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 class CameraError(Exception):
-<<<<<<< HEAD
+    HEAD
     """Camera Error"""
     pass
 

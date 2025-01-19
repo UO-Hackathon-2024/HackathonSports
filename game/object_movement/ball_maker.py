@@ -4,12 +4,13 @@ import math
 
 class Ball():
 
-    def __init__(self, color, x, y, radius, speed):
+    def __init__(self, color, x, y, radius, speed, hitbox = 50):
         self.color = color
         self.x = x
         self.y = y
         self.radius = radius
         self.speed = speed
+        self.hitbox = hitbox
 
 
     def move_ball(self, target_x, target_y):
@@ -26,6 +27,11 @@ class Ball():
             dy /= distance
             self.x += dx * self.speed
             self.y += dy * self.speed
+
+    def speed_up(self):
+        self.speed += 0.25
+
+
 
 """
 HOW TO IMPLEMENT:
