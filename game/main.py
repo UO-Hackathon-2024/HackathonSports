@@ -25,7 +25,7 @@ WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
 margin = SCREEN_HEIGHT - 50
 
-async def game_logic(socket, playerId, playerOneChar, firstPlayerScore, secondPlayerScore):
+async def game_logic(socket, playerId, playerOneChar, firstPlayerScore, secondPlayerScore, screen, clock, font):
     """Handles the asynchronous logic for the game."""
     li = [600, 700, 900, 950, 650]
     playerOneChar.set_target(random.choice(li))
@@ -68,7 +68,7 @@ async def main():
     print(message)
 
     # Start game logic in background
-    await game_logic(socket, playerId, playerOneChar, firstPlayerScore, secondPlayerScore)
+    await game_logic(socket, playerId, playerOneChar, firstPlayerScore, secondPlayerScore, screen, clock, font)
 
     pygame.quit()
 
