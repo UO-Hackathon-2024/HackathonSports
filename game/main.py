@@ -7,7 +7,7 @@ from object_movement.players import Player
 from game_setup.score import draw_text
 import websockets
 import asyncio
-
+from object_movement.ball_maker import Ball
 
 """
 WEBSOCKET CONNECTION
@@ -28,8 +28,9 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
 margin = SCREEN_HEIGHT - 50
-
-
+fball = Ball((255,255,255), 100, 100, 15,5)
+target_x, target_y = 400, 400
+cases = [(400,400), (200,100), (50, 400), (650,100), (25,25), (700, 400)]
 
 async def main(): 
 
@@ -61,13 +62,27 @@ async def main():
     await wait_for_start(socket)
 
     while running:  #this is the game loop
+
+        fball.move_ball(target_x, target_y)
+        pygame.draw.circle(screen, fball.color, (fball.x, fball.y), fball.radius)
+
+        #location = random.choice(cases)
+        #target_x, target_y = location
+
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
             playerOneChar.set_target(random.choice(li))
+            playerOneChar.move_character()
+            #await send_player_swing(id, socket)
+            #playerOneChar.set_target(random.choice(li))
+
+            location = random.choice(cases)
+            target_x, target_y = location
+
             await send_player_swing(id, socket)
             await asyncio.sleep(1)
                 
-        playerOneChar.move_character()
+        #playerOneChar.move_character()
         screen.fill((0,0,0))
         #draw_court()
         draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
