@@ -24,15 +24,17 @@ async def wait_for_start(websocket):
             break 
     
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
-WHITE = (255, 255, 255)
-GREEN = (34, 139, 34)
-margin = SCREEN_HEIGHT - 50
-fball = Ball((255,255,255), 100, 100, 15,5)
-target_x, target_y = 400, 400
-cases = [(400,400), (200,100), (50, 400), (650,100), (25,25), (700, 400)]
 
 async def main(): 
+    SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
+    WHITE = (255, 255, 255)
+    GREEN = (34, 139, 34)
+    margin = SCREEN_HEIGHT - 50
+    fball = Ball((255,255,255), 100, 100, 15,5)
+    target_x, target_y = 400, 400
+    cases = [(400,400), (200,100), (50, 400), (650,100), (25,25), (700, 400)]
+
+
 
     pygame.init()
 
