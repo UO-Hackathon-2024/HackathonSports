@@ -1,10 +1,13 @@
-from game import *
+from game_logic import *
+import random
 
 playerOneChar = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT//2 + 100, 75, 25)
 
 
 running = True
 while running:  #this is the game loop
+        li = [300,800, 1000]
+        playerOneChar.set_target(random.choice(li))
         playerOneChar.move_character()
         screen.fill((0,0,0))
         draw_court()

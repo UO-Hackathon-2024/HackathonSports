@@ -1,5 +1,5 @@
 import pygame
-
+import math
 pygame.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
@@ -11,6 +11,8 @@ clock = pygame.time.Clock()
 margin = SCREEN_HEIGHT - 50
 firstPlayerScore = 0
 secondPlayerScore = 0
+courtWidth = 200
+courtHeight = 400
 
 #Define Colors
 WHITE = (255, 255, 255)
@@ -21,8 +23,6 @@ font = pygame.font.Font(None, 36)
 
 def draw_court():
     # Define court boundaries (trapezoid for perspective)
-    courtWidth = 200
-    courtHeight = 400
     left = (SCREEN_WIDTH - courtWidth) // 2
     top = (SCREEN_HEIGHT - courtHeight) // 2
     
@@ -42,19 +42,33 @@ class Player:
         self.x = x
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, width, height)
-        self.speed = 5
+        self.speed = 7
+        self.target = SCREEN_WIDTH - courtWidth
 
+    def set_target(self, new_target):
+        self.target = new_target
+    
     def move_character(self):
-        key = pygame.key.get_pressed()
-        if key[pygame.K_RIGHT]:
-              self.x += self.speed
-        if key[pygame.K_LEFT]:
-              self.x -= self.speed
-        self.rect.topleft = (self.x, self.y)
+        if self.x < self.target:
+            self.x += self.speed
+            if self.x >= self.target:
+                self.x = self.target
+        elif self.x > self.target:
+            self.x -= self.speed
+            if self.x <= self.target:
+                self.x = self.target
+        self.rect.x = self.x
+
+        
+            
+        
+            
+        
+            
 
     
     def draw(self):
-            pygame.draw.rect(screen, (166, 189, 214), self.rect)
+        pygame.draw.rect(screen, (166, 189, 214), self.rect)
              
         
 
