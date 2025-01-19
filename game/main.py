@@ -22,12 +22,15 @@ font = pygame.font.Font(None, 36)
 
 playerOneChar = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT//2 + 100, 75, 25, 7)
 running = True
+li = [600,700,900,950,650]
+playerOneChar.set_target(random.choice(li))
 
 
 while running:  #this is the game loop
-        
-        li = [300,800, 1000]
-        playerOneChar.set_target(random.choice(li))
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE]:
+                playerOneChar.set_target(random.choice(li))
+                
         playerOneChar.move_character()
         screen.fill((0,0,0))
         #draw_court()
