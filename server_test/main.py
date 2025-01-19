@@ -12,16 +12,14 @@ async def send_player_swing(player_id: str, delay: float, websocket):
     print(f"Sent: {message}")
     
     # Wait for server acknowledgment (optional)
-    async for message in websocket: 
-        print(f"Received from server: {message}")
-        break
-
+   
 
 # Main function to connect both players
 async def main():
 
-    socket = await websockets.connect(URI)  # Connection for player 1
-    await send_player_swing('1', 3.5, socket)
+    socket = await websockets.connect(URI)  # Connection for player 1 async for message in websocket: 
+    
+    await send_player_swing('2', 6, socket)
     
 
 
