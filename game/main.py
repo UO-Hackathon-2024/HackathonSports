@@ -65,6 +65,7 @@ async def main():
         if key[pygame.K_SPACE]:
             playerOneChar.set_target(random.choice(li))
             await send_player_swing(id, socket)
+            await asyncio.sleep(1)
                 
         playerOneChar.move_character()
         screen.fill((0,0,0))
