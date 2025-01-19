@@ -16,6 +16,8 @@ cv2 (OpenCV): For advanced functionalities like image or motion processing.
 Programming Language:
 The game is entirely coded in Python.
 
+![image](https://github.com/user-attachments/assets/aa275af8-41cf-4e0d-bd6a-3fdc384eef8a)
+
 Hackathon 2025
 
 Josiah, Daniel, Miro, Hai, Kai
