@@ -62,13 +62,13 @@ export class TennisGame {
                 }
                 this.socketComm.sendEventWithNumber(GameEventWithNumber.PLAYER_1_SCORE, this.player1_score);
                 this.socketComm.sendEventWithNumber(GameEventWithNumber.PLAYER_2_SCORE, this.player2_score);
-                this.startRound();
                 if (this.player1_score >= this.scoreToWin) {
                     this.socketComm.sendEvent(GameEvent.PLAYER_1_WIN);
                 }
                 if (this.player2_score >= this.scoreToWin) {
                     this.socketComm.sendEvent(GameEvent.PLAYER_2_WIN);
                 }
+                this.startRound();
             }
         }, this.timingWindow.getDuration());
     }

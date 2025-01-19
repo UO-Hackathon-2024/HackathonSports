@@ -37,6 +37,9 @@ export class SocketCommunicator {
                 case GameEvent.BALL_GOING_TOWARDS_PLAYER_1:
                     socket.send("ball going towards player1");
                     break;
+                case GameEvent.BALL_GOING_TOWARDS_PLAYER_2:
+                    socket.send("ball going towards player2");
+                    break;
                 case GameEvent.BALL_IN_PLAYER1_RANGE:
                     socket.send("ball in player1 range");
                     break;
@@ -52,8 +55,8 @@ export class SocketCommunicator {
                 case GameEvent.PLAYER_1_WIN:
                     socket.send("player1 win");
                     break;
-                case GameEvent.PLAYER_1_WIN:
-                    socket.send("player1 win");
+                case GameEvent.PLAYER_2_WIN:
+                    socket.send("player2 win");
                     break;
                 case GameEvent.ROUND_START:
                     socket.send("round start");
