@@ -7,6 +7,8 @@ from game_setup.score import draw_text
 from object_movement.ball_maker import Ball
 from animation.animation_maker import Animation
 from animation.sprite_maker import SpriteSheet
+import cv2
+import numpy as np
 
 pygame.init()
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
@@ -16,7 +18,12 @@ clock = pygame.time.Clock()
 firstPlayerScore = 0
 secondPlayerScore = 0
 
-background_image = pygame.image.load('../images/game_screen/background_image.png').convert()
+BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT = 1280, 720
+image = cv2.imread('C:/Users/Miro/Desktop/Hackathon/HackathonSports/images/game_screen/image.png')
+resized_image = cv2.resize(image, (BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT))
+resized_image_2 = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+resized_image_2 = np.transpose(resized_image_2, (1, 0, 2))
+background_image = pygame.surfarray.make_surface(resized_image_2)
 
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
@@ -92,7 +99,6 @@ blank = idle_animation
 
 while running:  #this is the game loop
         screen.blit(background_image, (0, 0))
-        screen.fill((0,0,0))
 
         #blank.update()
         #blank.draw(screen, playerOneChar.rect.center[0] - 100, playerOneChar.rect.center[1] - 150)
