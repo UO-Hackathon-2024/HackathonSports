@@ -44,7 +44,7 @@ class Player:
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, width, height)
         self.speed = 7
-        self.target = x
+        self.target = (x,y)
 
     def set_target(self, new_target):
         self.target = new_target
