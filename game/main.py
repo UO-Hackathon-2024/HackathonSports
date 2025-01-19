@@ -1,60 +1,24 @@
-import pygame
 
-pygame.init()
-SCREEN_WIDTH, SCREEN_HEIGHT = 1200, 800
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #game window
+from game_logic import *
+import random
 
-clock = pygame.time.Clock()
+playerOneChar = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT//2 + 100, 75, 25)
+
+
 running = True
-
-WHITE = (255, 255, 255)
-GREEN = (34, 139, 34)
-
-# BILT : to copy graphics from one image to another.
-# In pygame we always pass positions as an (X,Y) coordinate
-# The top-left corner of a Surface is coordinate (0, 0). 
-# Moving to the right a little would be (10, 0)
-# and then moving down just as much would be (10, 10).
-
-def draw_court(screen):
-    # Define court boundaries (trapezoid for perspective)
-    top_width = 200
-    bottom_width = 600
-    height = 400
-    center_x = screen.get_width() // 2
-
-    pygame.draw.polygon(
-        screen, (34, 139, 34),  # Green color
-        [
-            (center_x - top_width // 2, 50),  # Top-left
-            (center_x + top_width // 2, 50),  # Top-right
-            (center_x + bottom_width // 2, 450),  # Bottom-right
-            (center_x - bottom_width // 2, 450)  # Bottom-left
-        ]
-    )
-
-    # Draw the net (white line)
-    pygame.draw.line(screen, (255, 255, 255), (center_x - 10, 250), (center_x + 10, 250), 5)
-
-class Player:
-        def __init__(self, position, score, swing):
-                self.position = position
-                self.score = score
-                self.swing = swing
-        
-        def update_position(self, ball_x, court_width):
-                speed = 5
-
-                
-
-
 while running:  #this is the game loop
+        li = [300,800, 1000]
+        playerOneChar.set_target(random.choice(li))
+        playerOneChar.move_character()
+        screen.fill((0,0,0))
+        draw_court()
+        draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15)
+        draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15)
+        playerOneChar.draw()
         
         for event in pygame.event.get(): #checks for game events
             if event.type == pygame.QUIT: #if the exit button is being clicked we will exit the while loop
                 running = False
-
-        draw_court(screen)
 
         pygame.display.flip()
 
