@@ -9,6 +9,7 @@ from animation.animation_maker import Animation
 from animation.sprite_maker import SpriteSheet
 import math
 
+
 pygame.init()
 
 def distance(x,y, target_x, target_y):
@@ -27,6 +28,11 @@ pygame.display.set_caption("Tennis Extreme")
 clock = pygame.time.Clock()
 firstPlayerScore = 0
 secondPlayerScore = 0
+
+BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT = 1280, 720
+#current_dir = images/game_screen/image.png
+#os.path.dirname(__file__)
+#image = cv2.imread('C:/Users/Miro/Desktop/Hackathon/HackathonSports/images/game_screen/image.png')
 
 
 WHITE = (255, 255, 255)
@@ -125,8 +131,7 @@ blank2 = idle_animation
 #------------------------------
 '''
 while running:  #this is the game loop
-        
-        screen.fill((0,0,0))
+        screen.fill((0, 0, 0))
 
         #blank.update()
         #blank.draw(screen, playerOneChar.rect.center[0] - 100, playerOneChar.rect.center[1] - 150)
@@ -165,8 +170,9 @@ while running:  #this is the game loop
         playerTwoChar.move_character()
         #print(f"target:{target_x}, current: {playerOneChar.rect.center[0]}")
         #draw_court()
-        draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
-        draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
+
+        #draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
+        #draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
         playerOneChar.draw(screen)
         playerTwoChar.draw(screen)
 
