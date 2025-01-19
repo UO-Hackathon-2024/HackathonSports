@@ -10,7 +10,7 @@ from animation.sprite_maker import SpriteSheet
 import math
 import cv2
 import os
-print("Current working directory:", os.getcwd())
+
 import numpy as np
 
 
@@ -39,7 +39,7 @@ BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT = 1280, 720
 image = cv2.imread("images/game_screen/image.png")
 resized_image = cv2.resize(image, (BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT))
 resized_image_2 = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
-resized_image_2 = np.transpose(resized_image_2, (1, 0, 2))
+resized_image_3 = np.transpose(resized_image_2, (1, 0, 2))
 background_image = pygame.surfarray.make_surface(resized_image_2)
 
 WHITE = (255, 255, 255)
