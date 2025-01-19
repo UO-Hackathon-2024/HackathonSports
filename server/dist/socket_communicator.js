@@ -14,7 +14,13 @@ export var GameEvent;
     GameEvent[GameEvent["PLAYER_2_HIT"] = 9] = "PLAYER_2_HIT";
     GameEvent[GameEvent["PLAYER_1_WIN"] = 10] = "PLAYER_1_WIN";
     GameEvent[GameEvent["PLAYER_2_WIN"] = 11] = "PLAYER_2_WIN";
+    GameEvent[GameEvent["ROUND_START"] = 12] = "ROUND_START";
 })(GameEvent || (GameEvent = {}));
+export var GameEventWithNumber;
+(function (GameEventWithNumber) {
+    GameEventWithNumber[GameEventWithNumber["PLAYER_1_SCORE"] = 0] = "PLAYER_1_SCORE";
+    GameEventWithNumber[GameEventWithNumber["PLAYER_2_SCORE"] = 1] = "PLAYER_2_SCORE";
+})(GameEventWithNumber || (GameEventWithNumber = {}));
 export class SocketCommunicator {
     constructor(sockets) {
         this.sockets = sockets;
@@ -31,6 +37,9 @@ export class SocketCommunicator {
                 case GameEvent.BALL_GOING_TOWARDS_PLAYER_1:
                     socket.send("ball going towards player1");
                     break;
+                case GameEvent.BALL_GOING_TOWARDS_PLAYER_2:
+                    socket.send("ball going towards player2");
+                    break;
                 case GameEvent.BALL_IN_PLAYER1_RANGE:
                     socket.send("ball in player1 range");
                     break;
@@ -46,8 +55,23 @@ export class SocketCommunicator {
                 case GameEvent.PLAYER_1_WIN:
                     socket.send("player1 win");
                     break;
-                case GameEvent.PLAYER_1_WIN:
-                    socket.send("player1 win");
+                case GameEvent.PLAYER_2_WIN:
+                    socket.send("player2 win");
+                    break;
+                case GameEvent.ROUND_START:
+                    socket.send("round start");
+                    break;
+            }
+        });
+    }
+    sendEventWithNumber(event, data) {
+        this.sockets.forEach(socket => {
+            switch (event) {
+                case GameEventWithNumber.PLAYER_1_SCORE:
+                    socket.send(`player 1 score: ${data}`);
+                    break;
+                case GameEventWithNumber.PLAYER_2_SCORE:
+                    socket.send(`player 2 score: ${data}`);
                     break;
             }
         });

@@ -1,6 +1,6 @@
 
 
-import { SocketCommunicator, GameEvent } from "./socket_communicator.js"; 
+import { SocketCommunicator, GameEvent, GameEventWithNumber } from "./socket_communicator.js"; 
 
 export class TennisGame { 
 
@@ -8,6 +8,10 @@ export class TennisGame {
     private turn = 1;
 
     private wasHit = false;  //resets every throw, to determine if the ball was ever hit 
+
+    scoreToWin = 3; 
+    player1_score = 0; 
+    player2_score = 0; 
 
     //set at init
     serveDuration: number; 
@@ -23,6 +27,8 @@ export class TennisGame {
 
     startRound() {
         console.log("Round started");
+        this.socketComm.sendEvent(GameEvent.ROUND_START);
+
         if (this.turn === 1) { 
             this.socketComm.sendEvent(GameEvent.WAITNG_FOR_PLAYER_2_SERVE);
         } else { 
@@ -62,10 +68,21 @@ export class TennisGame {
             if (this.wasHit === false) { 
                 if (this.turn == 1) { 
                     this.socketComm.sendEvent(GameEvent.PLAYER_1_MISS);
+                    this.player2_score++; 
+
                     console.log("Player 1 miss")
                 } else { 
                     this.socketComm.sendEvent(GameEvent.PLAYER_2_MISS);
+                    this.player1_score++; 
                     console.log("Player 2 miss")
+                }
+                this.socketComm.sendEventWithNumber(GameEventWithNumber.PLAYER_1_SCORE, this.player1_score);
+                this.socketComm.sendEventWithNumber(GameEventWithNumber.PLAYER_2_SCORE, this.player2_score);
+                if (this.player1_score >= this.scoreToWin) { 
+                    this.socketComm.sendEvent(GameEvent.PLAYER_1_WIN);
+                }
+                if (this.player2_score >= this.scoreToWin) { 
+                    this.socketComm.sendEvent(GameEvent.PLAYER_2_WIN);
                 }
                 this.startRound(); 
             }
