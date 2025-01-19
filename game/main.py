@@ -20,7 +20,7 @@ async def send_player_swing(playerId: int, websocket):
 
 async def wait_for_start(websocket): 
     async for message in websocket: 
-        if message == "round_start": 
+        if message == "round start": 
             break 
     
 
@@ -28,6 +28,8 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
 margin = SCREEN_HEIGHT - 50
+
+
 
 async def main(): 
 
@@ -47,8 +49,6 @@ async def main():
     li = [600,700,900,950,650]
 
     playerOneChar.set_target(random.choice(li))
-
-
 
     #Socket connection
     socket = await websockets.connect(URI)
@@ -83,7 +83,8 @@ async def main():
     pygame.quit()
 
 if __name__ == "__main__": 
-    asyncio.run(main())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
 
 pygame.quit()
 
