@@ -20,14 +20,9 @@ async def send_player_swing(player_id: str, delay: float, websocket):
 # Main function to connect both players
 async def main():
 
-    socket1 = await websockets.connect(URI)  # Connection for player 1
-    socket2 = await websockets.connect(URI)  # Connection for player 2
-
-    # Run both players' swings concurrently
-    await asyncio.gather(
-        send_player_swing('1', 3.5, socket2),
-        send_player_swing('2', 6, socket2)
-    )
+    socket = await websockets.connect(URI)  # Connection for player 1
+    await send_player_swing('1', 3.5, socket)
+    
 
 
 # Run the WebSocket client for both players
