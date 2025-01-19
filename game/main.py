@@ -197,69 +197,6 @@ fswing_animation = Animation(
 blank = fidle_animation
 blank2 = idle_animation
 #------------------------------
-'''
-while running:  #this is the game loop
-        screen.fill((0, 0, 0))
-
-        #blank.update()
-        #blank.draw(screen, playerOneChar.rect.center[0] - 100, playerOneChar.rect.center[1] - 150)
-        
-        key = pygame.key.get_pressed()
-
-        if key[pygame.K_a]:
-                location = random.choice(cases1)
-                target_x, target_y = location
-                playerOneChar.set_target(location)
-                #playerTwoChar.set_target(location)
-                #print(location)
-                #print(f"target:{target_x}, current: {playerOneChar.rect.center[0]}")
-
-
-        elif key[pygame.K_l]:
-              spot = random.choice(cases2)
-              target_x, target_y = spot
-              playerTwoChar.set_target(spot)
-              #print(spot)
-
-        fball.move_ball(target_x, target_y)
-        pygame.draw.circle(screen, fball.color, (fball.x, fball.y), fball.radius)
-
-        playerOneChar.move_character()
-        #--------------- character running animation logic ---------------------------------------
-        if target_x < playerOneChar.rect.center[0]:
-                blank = left_animation
-
-        elif target_x > playerOneChar.rect.center[0]:
-                blank = right_animation
-
-        elif target_x == playerOneChar.rect.center[0]:
-                blank = idle_animation
-
-        playerTwoChar.move_character()
-        #print(f"target:{target_x}, current: {playerOneChar.rect.center[0]}")
-        #draw_court()
-
-        #draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
-        #draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
-        playerOneChar.draw(screen)
-        playerTwoChar.draw(screen)
-
-        #print(playerOneChar.x)
-        blank.update()
-        blank.draw(screen, playerOneChar.rect.center[0] - 100, playerOneChar.rect.center[1] - 150)
-
-
-
-        for event in pygame.event.get(): #checks for game events
-            if event.type == pygame.QUIT: #if the exit button is being clicked we will exit the while loop
-                running = False
-
-        pygame.display.flip()
-
-        clock.tick(60)  
-
-pygame.quit()
-'''
 
 is_chasing_person1 = True  
 is_chasing_person2 = False
