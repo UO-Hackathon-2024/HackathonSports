@@ -1,0 +1,22 @@
+{
+  "name": "hacksports_server",
+  "version": "1.0.0",
+  "description": "Game server for hack sports",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "@types/ws": "^8.5.13",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
