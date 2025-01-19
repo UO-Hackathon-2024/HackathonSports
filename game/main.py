@@ -51,7 +51,7 @@ async def main():
 
     #Socket connection
     socket = await websockets.connect(URI)
-    message = socket.recv()
+    message = await socket.recv()
     id = 1
     if (message == "player id: 1"): 
         id = 1
