@@ -285,6 +285,8 @@ deathbox = pygame.Rect(person.x - deathbox_width // 2, person.y - deathbox_heigh
 deathbox_width2, deathbox_height2 = 20, 20
 deathbox2 = pygame.Rect(person2.x - deathbox_width2 //2, person2.y - deathbox_height2, deathbox_width2, deathbox_height2)
 
+point_scored = False
+
 while running:  #this is the game loop
         
 
@@ -421,7 +423,7 @@ while running:  #this is the game loop
         print("Ball is stopped")
 
 
-    
+    '''
     if deathbox.colliderect(pygame.Rect(fball.x - fball.radius, fball.y - fball.radius, fball.radius * 2, fball.radius * 2)):
         secondPlayerScore += 1
         print("P2 Point!")
@@ -436,7 +438,31 @@ while running:  #this is the game loop
         fball.speed = 5
         if firstPlayerScore >= 11:
             print("P1 WIN!")
-    
+    '''
+
+    if deathbox.colliderect(pygame.Rect(fball.x - fball.radius, fball.y - fball.radius, fball.radius * 2, fball.radius * 2)):
+        if not point_scored:
+            secondPlayerScore += 1
+            print("P2 Point!")
+            fball.speed = 5
+            if secondPlayerScore >= 11:
+                print("P2 WIN!")
+            point_scored = True  # Prevent further scoring until reset
+
+    if deathbox2.colliderect(pygame.Rect(fball.x - fball.radius, fball.y - fball.radius, fball.radius * 2, fball.radius * 2)):
+        if not point_scored:
+            firstPlayerScore += 1
+            print("P1 Point!")
+            fball.speed = 5
+            if firstPlayerScore >= 11:
+                print("P1 WIN!")
+            point_scored = True
+
+    if point_scored:
+        fball.x = SCREEN_WIDTH // 2
+        fball.y = SCREEN_HEIGHT // 2
+        fball.speed = 4  # Reset the speed
+        point_scored = False
 
 
     #pygame.draw.circle(screen, test_ball.color, (test_ball.x, test_ball.y), test_ball.radius)
