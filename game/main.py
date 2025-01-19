@@ -23,9 +23,8 @@ font = pygame.font.Font(None, 36)
 playerOneChar = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT//2 + 100, 75, 25, 7)
 running = True
 li = [600,700,900,950,650]
+
 playerOneChar.set_target(random.choice(li))
-
-
 while running:  #this is the game loop
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
