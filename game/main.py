@@ -19,7 +19,7 @@ async def send_player_swing(playerId: int, websocket):
 
 async def wait_for_start(websocket): 
     async for message in websocket: 
-        if message == "round_start": 
+        if message == "round start": 
             break 
     
 
@@ -47,9 +47,7 @@ async def main():
 
     playerOneChar.set_target(random.choice(li))
 
-
-
-    #Socket connection
+    # Socket connection
     socket = await websockets.connect(URI)
     message = await socket.recv()
     id = 1
@@ -57,6 +55,7 @@ async def main():
         id = 1
     if (message == "player id: 2"): 
         id = 2
+    print(message)
     await wait_for_start(socket)
 
     while running:  #this is the game loop
@@ -84,5 +83,4 @@ async def main():
 if __name__ == "__main__": 
     asyncio.run(main())
 
-pygame.quit()
 
