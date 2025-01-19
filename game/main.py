@@ -60,25 +60,25 @@ async def main():
     await wait_for_start(socket)
 
     while running:  #this is the game loop
-            key = pygame.key.get_pressed()
-            if key[pygame.K_SPACE]:
-                    playerOneChar.set_target(random.choice(li))
-                    await send_player_swing(id, socket)
-                    
-            playerOneChar.move_character()
-            screen.fill((0,0,0))
-            #draw_court()
-            draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
-            draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
-            playerOneChar.draw(screen)
-            
-            for event in pygame.event.get(): #checks for game events
-                if event.type == pygame.QUIT: #if the exit button is being clicked we will exit the while loop
-                    running = False
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE]:
+            playerOneChar.set_target(random.choice(li))
+            await send_player_swing(id, socket)
+                
+        playerOneChar.move_character()
+        screen.fill((0,0,0))
+        #draw_court()
+        draw_text(f"Player 1: {firstPlayerScore}", font, WHITE, 10, margin + 15, screen)
+        draw_text(f"Player 2: {secondPlayerScore}", font, WHITE, SCREEN_HEIGHT + 425, margin + 15, screen)
+        playerOneChar.draw(screen)
+        
+        for event in pygame.event.get(): #checks for game events
+            if event.type == pygame.QUIT: #if the exit button is being clicked we will exit the while loop
+                running = False
 
-            pygame.display.flip()
+        pygame.display.flip()
 
-            clock.tick(60)  
+        clock.tick(60)  
     pygame.quit()
 
 if __name__ == "__main__": 
