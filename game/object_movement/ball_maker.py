@@ -21,7 +21,7 @@ class Ball():
         #print(dx)
         #print(dy)
 
-        if distance > 5:
+        if distance > 0:
             dx /= distance
             dy /= distance
             self.x += dx * self.speed
