@@ -8,6 +8,9 @@ from object_movement.ball_maker import Ball
 from animation.animation_maker import Animation
 from animation.sprite_maker import SpriteSheet
 import math
+import os
+import cv2
+import numpy as np
 
 
 pygame.init()
@@ -21,7 +24,6 @@ def distance(x,y, target_x, target_y):
     distance = math.sqrt(dx ** 2 + dy ** 2)
     return distance       
 
-
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #game window
 pygame.display.set_caption("Tennis Extreme")
@@ -33,7 +35,12 @@ BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT = 1280, 720
 #current_dir = images/game_screen/image.png
 #os.path.dirname(__file__)
 #image = cv2.imread('C:/Users/Miro/Desktop/Hackathon/HackathonSports/images/game_screen/image.png')
-
+image_path = "images\game_screen\image.png"
+image = cv2.imread(image_path)
+resized_image = cv2.resize(image, (BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT))
+resized_image_2 = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+resized_image_2 = np.transpose(resized_image_2, (1, 0, 2))
+background_image = pygame.surfarray.make_surface(resized_image_2)
 
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
@@ -220,10 +227,8 @@ deathbox2 = pygame.Rect(person2.x - deathbox_width2 //2, person2.y - deathbox_he
 
 while running:  #this is the game loop
         
-        screen.fill((0,0,0))
-
-
-        
+        screen.blit(background_image, (0,0,0))
+ 
         hitbox.x = person.x - hitbox_width // 2
         hitbox.y = person.y - hitbox_height // 2
 
