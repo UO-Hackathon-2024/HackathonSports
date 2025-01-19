@@ -21,8 +21,8 @@ font = pygame.font.Font(None, 36)
 
 
 playerOneChar = Player(SCREEN_WIDTH//2,SCREEN_HEIGHT//2 + 100, 75, 25, 7)
-
 running = True
+
 
 while running:  #this is the game loop
         
