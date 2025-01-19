@@ -22,7 +22,15 @@ const beforeWindowDuration = 2000;
 const windowDuration = 1000; 
 const game = new TennisGame(serveDuration, beforeWindowDuration, windowDuration);
 /* --------------- */ 
-
+const startPingInterval = (ws: WebSocket, interval: number = 30000) => {
+    const pingInterval = setInterval(() => {
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.ping(); // Send a ping frame
+    } else {
+        clearInterval(pingInterval); // Stop pinging if the connection is closed
+    }
+  }, interval);
+}
 
 wss.on('connection', (socket: WebSocket) => {
     //Start the game when both players join 
@@ -44,6 +52,10 @@ wss.on('connection', (socket: WebSocket) => {
 
         players[0].socket.send(`player id: 1`);
         players[1].socket.send(`player id: 2`);
+
+        startPingInterval(players[0].socket);
+        startPingInterval(players[1].socket);
+
 
         const socketComm = new SocketCommunicator([players[0].socket, players[1].socket]);
         game.socketComm = socketComm; 
