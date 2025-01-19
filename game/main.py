@@ -50,7 +50,7 @@ async def main():
 
 
     #Socket connection
-    socket = await websockets.connect(URI)
+    socket = await websockets.connect(URI, ping_timeout = 90000)
     message = await socket.recv()
     id = 1
     if (message == "player id: 1"): 
