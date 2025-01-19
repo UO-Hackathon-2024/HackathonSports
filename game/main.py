@@ -40,7 +40,7 @@ image = cv2.imread("images/game_screen/image.png")
 resized_image = cv2.resize(image, (BACK_SCREEN_WIDTH, BACK_SCREEN_HEIGHT))
 resized_image_2 = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
 resized_image_3 = np.transpose(resized_image_2, (1, 0, 2))
-background_image = pygame.surfarray.make_surface(resized_image_2)
+background_image = pygame.surfarray.make_surface(resized_image_3)
 
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
