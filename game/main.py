@@ -11,8 +11,8 @@ import asyncio
 """
 WEBSOCKET CONNECTION
 """
-URI = "ws://10.108.22.125:3000"  # Replace with your server's IP and port
-
+# URI = "ws://10.108.22.125:3000"  # Replace with your server's IP and port
+URI = "ws://10.108.115.4:3000"
 async def send_player_swing(playerId: int, websocket): 
     message = f"player{playerId}_swing"
     await websocket.send(message)
