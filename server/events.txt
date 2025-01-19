@@ -1,0 +1,22 @@
+
+Events without data -----> 
+
+waiting for player1 serve
+waiting for player2 serve
+ball going towards player1
+ball going towards player2
+ball in player1 range
+ball in player2 range
+player1 hit
+player2 hit
+player1 win
+player2 win
+round start
+
+Events with data ----> 
+
+player id: ${id}
+player 1 score: ${score} 
+player 2 score: ${score}
+
+
