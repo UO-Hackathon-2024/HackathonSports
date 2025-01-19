@@ -16,14 +16,14 @@ class Player:
     
     
     def move_character(self):
-        if self.x < self.target:
+        if self.x < self.target[0]:
             self.x += self.speed
-            if self.x >= self.target:
-                self.x = self.target
-        elif self.x > self.target:
+            if self.x >= self.target[0]:
+                self.x = self.target[0]
+        elif self.x > self.target[0]:
             self.x -= self.speed
-            if self.x <= self.target:
-                self.x = self.target
+            if self.x <= self.target[0]:
+                self.x = self.target[0]
         self.rect.x = self.x
 
         
