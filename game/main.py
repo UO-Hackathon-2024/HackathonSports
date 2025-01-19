@@ -18,7 +18,7 @@ async def send_player_swing(playerId: int, websocket):
     await websocket.send(message)
 
 async def wait_for_start(websocket): 
-    for message in websocket: 
+    async for message in websocket: 
         if message == "round_start": 
             break 
     
