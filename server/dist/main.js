@@ -31,17 +31,21 @@ wss.on('connection', (socket) => {
     console.log(connectMessage);
     //socket.send(connectMessage);
     if (players.length == 2) {
+        players[0].socket.send(`player id: 1`);
+        players[1].socket.send(`player id: 2`);
         const socketComm = new SocketCommunicator([players[0].socket, players[1].socket]);
         game.socketComm = socketComm;
         game.startRound();
-        socket.on('message', (message) => {
-            message = message.toString();
-            if (message === "player1_swing") {
-                game.swing(1);
-            }
-            else if (message === "player2_swing") {
-                game.swing(2);
-            }
+        players.forEach(player => {
+            player.socket.on('message', (message) => {
+                message = message.toString();
+                if (message === "player1_swing") {
+                    game.swing(1);
+                }
+                else if (message === "player2_swing") {
+                    game.swing(2);
+                }
+            });
         });
     }
 });
