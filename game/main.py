@@ -9,7 +9,6 @@ from animation.animation_maker import Animation
 from animation.sprite_maker import SpriteSheet
 import math
 import cv2
-import os
 
 import numpy as np
 
