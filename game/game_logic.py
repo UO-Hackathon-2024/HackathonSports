@@ -1,5 +1,7 @@
 import pygame
 import math
+from object_movement import players
+from game_setup import score
 
 pygame.init()
 
