@@ -20,7 +20,7 @@ def swing_detection()->bool:
     last_swing_time = 0  # To track time of the last swing
 
     # Start capturing video from the webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     print("Press 'q' to exit.")
     while True:
