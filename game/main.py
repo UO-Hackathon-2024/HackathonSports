@@ -16,6 +16,7 @@ clock = pygame.time.Clock()
 firstPlayerScore = 0
 secondPlayerScore = 0
 
+background_image = pygame.image.load('../images/game_screen/background_image.png').convert()
 
 WHITE = (255, 255, 255)
 GREEN = (34, 139, 34)
@@ -90,7 +91,7 @@ blank = idle_animation
 #------------------------------
 
 while running:  #this is the game loop
-        
+        screen.blit(background_image, (0, 0))
         screen.fill((0,0,0))
 
         #blank.update()
